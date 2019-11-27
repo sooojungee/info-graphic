@@ -136,7 +136,7 @@ export default class Getbasic extends Vue {
 
   private handleSubmit(e: any) {
     e.preventDefault();
-    this.form.validateFieldsAndScroll((err: any, values: any) => {
+    this.form.validateFieldsAndScroll(async (err: any, values: any) => {
       if (!err) {
         if (this.current === 0) {
           this.basic = values;
@@ -175,10 +175,10 @@ export default class Getbasic extends Vue {
             });
             this.profile.data.experiences = this.career.experience.list;
             this.profile.data.url = this.url;
-            this.profile.saveSync();
-            window.location.href = `${window.location.origin}/profile/${
-              this.url
-            }`;
+            await this.profile.saveSync();
+            window.location.href = `${
+              window.location.origin
+            }/profile/${this.url}`;
           }
         }
       }

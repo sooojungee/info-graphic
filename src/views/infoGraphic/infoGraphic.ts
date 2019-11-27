@@ -48,6 +48,8 @@ export default class InfoGraphic extends Vue {
   private profile: FirestoreDocument<Profile> = Collections.profiles.create(
     Profile,
   );
+
+  // private profile = profile;
   private colors: string[] = [
     '#EF9A9A',
     '#90CAF9',
@@ -134,9 +136,11 @@ export default class InfoGraphic extends Vue {
   }
 
   private async mounted() {
+    // console.log('dddd')
     const value = await Collections.profiles
       .createQuery('url', '==', this.$route.params.pid)
       .exec(Profile);
+    // console.log('ffff', value, this.$route.params.pid);
     this.profile = value[0];
     _.forEach(this.profile.data.skills, (skill, i) => {
       skill.color = this.colors[i];
